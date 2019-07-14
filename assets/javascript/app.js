@@ -1,6 +1,6 @@
 Questions = [
     {
-        question: "Who was prophized to *Bring Balance to the Force* ?",
+        question: "Who was prophesied to *Bring Balance to the Force* ?",
         answers: ["Anakin Skywalker", "Obi-Wan", "Yoda", "Han Solo"],
         CorrectAnswer: 0
     },
@@ -37,6 +37,8 @@ var state = {
 };
 
 startGame();
+$("#result").hide();
+$(".timer").hide();
 
 function startGame() {
     $("#start").on("click", function () {
@@ -45,6 +47,9 @@ function startGame() {
         $("#result").empty();
         $("#instructions").hide();
         $("#start").hide();
+        $(".timer").show();
+        $('.container').css("height","10px");
+        $("#result").hide();
         gameplay();
     });
 };
@@ -58,6 +63,7 @@ function gameplay() {
         choice.addClass("answerchoice");
         choice.data("position", i);
         choice.appendTo(".answers");
+        $("<br>").appendTo(".answers");
         choice.text(q.answers[i]);
     }
 };
@@ -98,11 +104,13 @@ $(document).on("click", '.answerchoice', function () {
 });
 
 function displayResults() {
-    $("#result").text("Final Correct: " + Correct + ". Final Incorrect: " + Incorrect);
+    $("#result").text("Final Correct: " + Correct + " Final Incorrect: " + Incorrect);
     state.currentQ = 0;
     $("#start").show();
+    $("#result").show();
     $("#question").empty();
     $(".answers").empty();
+    $(".timer").hide();
 };
 
 

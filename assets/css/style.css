@@ -1,4 +1,6 @@
-/* need all necessary css to make game look good, maybe bootstrap, maybe just floating a bunch */
+body{
+    background-size:cover
+}    
 h1{
     width: 100%;
     text-align: center;
@@ -15,12 +17,46 @@ h1{
     border-color: black;
     border-style: solid;
 }
+.container{
+    height: 200px;;
+}
 #start{
-    float: initial;
-    align-items: center;
-    justify-content: center;
+    width: 10%;
+    position: relative;
+    left: 45%;
+    top: 50%;
 }
 #question{
+    width: 100%;
+    text-align: center;
+}
+.ansbox{
+    height: 300px;
+}
+.answers{
+    position: relative;
+    left: 30%;
+    letter-spacing: 5px;
+}
+#result{
+    width: 40%;
+    text-align: center;
+    color: white;
+    background-color: green;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px;
+    border-color: black;
+    border-style: solid;
+}
+.answerchoice{
+    width: 100px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+.timer{
     width: 100%;
     text-align: center;
 }
