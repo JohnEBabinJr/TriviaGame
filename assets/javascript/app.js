@@ -5,14 +5,14 @@ Questions = [
         CorrectAnswer: 0
     },
     {
-        question: "What is the most imfamous ship in the galaxy?",
-        answers: ["Ans1", "Ans2", "Ans3", "Ans4"],
-        CorrectAnswer: 0
+        question: "What is the name of the frozen ice planet with a rebel base?",
+        answers: ["Naboo", "Hoth", "Tatooine", "Coruscant"],
+        CorrectAnswer: 1
     },
     {
-        question: "What is the name of the frozen ice planet with a rebel base?",
-        answers: ["Hoth", "Naboo", "Tatooine", "Coruscant"],
-        CorrectAnswer: 0
+        question: "What color is Mace Windu's Lightsaber?",
+        answers: ["Red", "Green", "Purple", "Red"],
+        CorrectAnswer: 2
     },
     {
         question: "What are the names of Anakin Skywalker's children?",
@@ -21,46 +21,58 @@ Questions = [
     },
     {
         question: "Who is considerd the greatest smuggler in the galaxy?",
-        answers: ["Han Solo", "Jar Jar Binks", "Boba Fett", "Chewbacca"],
-        CorrectAnswer: 0
+        answers: ["Jar Jar Binks", "Boba Fett", "Chewbacca", "Han Solo"],
+        CorrectAnswer: 3
     }
 ];
-
+var Score = 0;
+var state = {
+    currentQ: 0,
+    userGuess: null,
+    timeRemaining: 10,
+};
+startGame();
 function startGame() {
-    //onclick of start button
-    //hide instruction div
-    //hide start button
-    //hide result div
-    gameplay();
+    $("#start").on("click", function () {
+        Score = 0;
+        $("#result").empty();
+        $("#instructions").hide();
+        $("#start").hide();
+        gameplay();
+    });
 };
-
 function gameplay() {
-    //loop through questions
-    updateDisplay();
-    //on click for selecting answer
-    checkAnswer();
-
-    displayResults();
+    var q = Questions[state.currentQ];
+    $(".question").text(q.question);
+    for (var i = 0; i < q.answers.length; i++) {
+        var choice = $("<button>");
+        choice.addClass("answerchoice");
+        choice.data("position", i);
+        choice.appendTo(".answers");
+        choice.text(q.answers[i]);
+    }
 };
-
-function updateDisplay() {
-    //reset timer
-    //clear out html
-    //add in new questions to html
-    //set clickable attr for each possible ans
-};
-
-function checkAnswer() {
-    //compare to ans in object.answers array
-    //if answer selected is correct, add points
-    //alert correct choice
-    //if not dont add points
-    //alert incorrect
-};
-
+$(document).on("click", '.answerchoice', function () {
+    if ($(this).data("position") == Questions[state.currentQ].CorrectAnswer) {
+        alert("Correct!");
+        Score++;
+    }
+    else {
+        alert("Incorrect");
+    }
+    if (state.currentQ == 4) {
+        displayResults();
+    }
+    else {
+        state.currentQ++;
+        $(".answers").empty();
+        gameplay();
+    }
+});
 function displayResults() {
-    //display result div
-    //show total score and how many questions incorrect
-    //unhide start button
-}
-
+    $("#result").text("Final Score: " + Score);
+    state.currentQ = 0;
+    $("#start").show();
+    $(".question").empty();
+    $(".answers").empty();
+};
