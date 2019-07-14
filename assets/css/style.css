@@ -1,0 +1,26 @@
+/* need all necessary css to make game look good, maybe bootstrap, maybe just floating a bunch */
+h1{
+    width: 100%;
+    text-align: center;
+}
+#instructions{
+    width: 60%;
+    text-align: center;
+    background-color: orange;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px;
+    border-color: black;
+    border-style: solid;
+}
+#start{
+    float: initial;
+    align-items: center;
+    justify-content: center;
+}
+#question{
+    width: 100%;
+    text-align: center;
+}

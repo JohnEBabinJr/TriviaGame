@@ -25,25 +25,34 @@ Questions = [
         CorrectAnswer: 3
     }
 ];
-var Score = 0;
+
+var Correct = 0;
+
+var Incorrect =0;
+
 var state = {
     currentQ: 0,
     userGuess: null,
     timeRemaining: 10,
 };
+
 startGame();
+
 function startGame() {
     $("#start").on("click", function () {
-        Score = 0;
+        Correct = 0;
+        Incorrect=0;
         $("#result").empty();
         $("#instructions").hide();
         $("#start").hide();
         gameplay();
     });
 };
+
 function gameplay() {
     var q = Questions[state.currentQ];
-    $(".question").text(q.question);
+    $("#question").text(q.question);
+    TimeOut = setTimeout(timeout, 10000);   
     for (var i = 0; i < q.answers.length; i++) {
         var choice = $("<button>");
         choice.addClass("answerchoice");
@@ -52,13 +61,31 @@ function gameplay() {
         choice.text(q.answers[i]);
     }
 };
+
+function timeout() {
+    clearTimeout(TimeOut);
+    Incorrect++;
+    if (state.currentQ == 4) {
+        alert("Time is Up!");
+        displayResults();
+    }
+    else {
+        alert("Time is Up!");
+        state.currentQ++;
+        $(".answers").empty();
+        gameplay();
+    }
+};
+
 $(document).on("click", '.answerchoice', function () {
+    clearTimeout(TimeOut);
     if ($(this).data("position") == Questions[state.currentQ].CorrectAnswer) {
         alert("Correct!");
-        Score++;
+        Correct++;
     }
     else {
         alert("Incorrect");
+        Incorrect++;
     }
     if (state.currentQ == 4) {
         displayResults();
@@ -69,10 +96,15 @@ $(document).on("click", '.answerchoice', function () {
         gameplay();
     }
 });
+
 function displayResults() {
-    $("#result").text("Final Score: " + Score);
+    $("#result").text("Final Correct: " + Correct + ". Final Incorrect: " + Incorrect);
     state.currentQ = 0;
     $("#start").show();
-    $(".question").empty();
+    $("#question").empty();
     $(".answers").empty();
 };
+
+
+
+// how to get timer to display
