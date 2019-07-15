@@ -28,7 +28,7 @@ Questions = [
 
 var Correct = 0;
 
-var Incorrect =0;
+var Incorrect = 0;
 
 var state = {
     currentQ: 0,
@@ -38,17 +38,17 @@ var state = {
 
 startGame();
 $("#result").hide();
-$(".timer").hide();
+$("#TimeLeftBar").hide();
 
 function startGame() {
     $("#start").on("click", function () {
         Correct = 0;
-        Incorrect=0;
+        Incorrect = 0;
         $("#result").empty();
         $("#instructions").hide();
         $("#start").hide();
-        $(".timer").show();
-        $('.container').css("height","10px");
+        $("#TimeLeftBar").show();
+        $('.container').css("height", "10px");
         $("#result").hide();
         gameplay();
     });
@@ -57,7 +57,15 @@ function startGame() {
 function gameplay() {
     var q = Questions[state.currentQ];
     $("#question").text(q.question);
-    TimeOut = setTimeout(timeout, 10000);   
+    var timeleft = 10;
+    var TimeLeft = setInterval(function () {
+        document.getElementById("TimeLeftBar").value = 11 - timeleft;
+        timeleft -= 1;
+        if (timeleft <= 0)
+            clearInterval(TimeLeft);
+
+    }, 1000);
+    TimeOut = setTimeout(timeout, 10000);
     for (var i = 0; i < q.answers.length; i++) {
         var choice = $("<button>");
         choice.addClass("answerchoice");
@@ -110,9 +118,5 @@ function displayResults() {
     $("#result").show();
     $("#question").empty();
     $(".answers").empty();
-    $(".timer").hide();
+    $("#TimeLeftBar").hide();
 };
-
-
-
-// how to get timer to display

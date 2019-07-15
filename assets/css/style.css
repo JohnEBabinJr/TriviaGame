@@ -60,3 +60,9 @@ h1{
     width: 100%;
     text-align: center;
 }
+#TimeLeftBar{
+    height: 20px;
+    width: 40%;
+    margin-right: 30%;
+    margin-left: 30%;
+}
